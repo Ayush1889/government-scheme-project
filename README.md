@@ -2,20 +2,20 @@
 
 ## About the Project
 
-The Government Scheme Assistant is a Python-based project that helps users discover relevant government schemes based on their personal information and needs. It uses text retrieval, profile extraction, and rule-based eligibility checking to provide scheme recommendations and application guidance.
+The Government Scheme Assistant is a Python-based application that helps users discover relevant government schemes based on their needs and personal information. It uses TF-IDF retrieval, Gemini-powered profile extraction, and rule-based eligibility checking to provide scheme recommendations and application guidance.
 
 ## Features
 
-- **Scheme Discovery:** Finds relevant government schemes using TF-IDF and cosine similarity.
-- **AI-Powered Profile Extraction:** Uses the Gemini API to extract user information from natural-language queries.
-- **Eligibility Checking:** Evaluates user profiles against the eligibility conditions available in the dataset.
-- **Application Guidance:** Provides information about required documents, application steps, and official application websites.
-- **Multi-Agent Architecture:** Separates scheme discovery, eligibility checking, application guidance, and orchestration into different modules.
+- **Scheme Discovery:** Retrieves relevant schemes using TF-IDF and cosine similarity.
+- **AI-Powered Profile Extraction:** Uses Google Gemini to extract structured information from natural-language queries.
+- **Eligibility Checking:** Evaluates user profiles against implemented eligibility rules.
+- **Application Guidance:** Provides available documents, application steps, and official website links.
+- **Multi-Agent Architecture:** Separates discovery, eligibility, application guidance, and orchestration into individual modules.
 
 ## Tech Stack
 
 - Python
-- Google Gemini API
+- Google Gemini API (`google-genai`)
 - scikit-learn
 - TF-IDF and cosine similarity
 - CSV dataset
@@ -26,48 +26,39 @@ The Government Scheme Assistant is a Python-based project that helps users disco
 | File | Purpose |
 |---|---|
 | `rag.py` | Retrieves relevant schemes using TF-IDF and cosine similarity |
-| `discovery_agent.py` | Finds candidate schemes relevant to the user's query |
-| `llm.py` | Extracts a structured user profile using Gemini |
-| `eligibility.py` | Checks the profile against available eligibility rules |
-| `application_agent.py` | Provides scheme application information |
+| `discovery_agent.py` | Finds candidate schemes |
+| `llm.py` | Extracts user profiles using Gemini |
+| `eligibility.py` | Checks profiles against implemented rules |
+| `application_agent.py` | Provides application information |
 | `orchestrator.py` | Coordinates the agents |
-| `government_schemes.csv` | Stores government scheme information |
+| `government_schemes.csv` | Stores scheme information |
 | `test_llm.py` | Tests Gemini profile extraction |
-| `test_discovery.py` | Tests scheme discovery |
+| `test_discovery.py` | Tests scheme retrieval |
 | `test_eligibility.py` | Tests eligibility checking |
 | `test_application.py` | Tests application guidance |
 | `test_orchestrator.py` | Tests the complete workflow |
 
-## Setup and Installation
+## Setup
 
-### 1. Clone the repository
-
-```bash
-git clone <your-repository-url>
-cd government-scheme-project
-```
-
-### 2. Create a virtual environment
+### 1. Create a virtual environment
 
 ```bash
 python -m venv .venv
 ```
 
-Activate it on Windows PowerShell:
+Activate it in Windows PowerShell:
 
 ```powershell
 .\.venv\Scripts\Activate.ps1
 ```
 
-### 3. Install dependencies
+### 2. Install dependencies
 
-```bash
+```powershell
 python -m pip install -U google-genai python-dotenv scikit-learn
 ```
 
-Install any additional dependencies required by the project.
-
-### 4. Configure the Gemini API key
+### 3. Configure the API key
 
 Create a `.env` file in the project root:
 
@@ -75,9 +66,9 @@ Create a `.env` file in the project root:
 GEMINI_API_KEY=your_api_key_here
 ```
 
-Obtain an API key from [Google AI Studio](https://aistudio.google.com/apikey).
+Get a key from [Google AI Studio](https://aistudio.google.com/apikey).
 
-**Security:** Never commit your `.env` file or expose your API key publicly.
+Never commit your `.env` file or expose your API key publicly.
 
 ## Running the Project
 
@@ -99,7 +90,7 @@ Test eligibility checking:
 python test_eligibility.py
 ```
 
-Test the complete assistant workflow:
+Test the complete workflow:
 
 ```bash
 python test_orchestrator.py
@@ -108,16 +99,16 @@ python test_orchestrator.py
 ## How It Works
 
 1. The user submits a natural-language query.
-2. Gemini extracts the available user-profile information.
-3. The Discovery Agent retrieves relevant schemes using TF-IDF and cosine similarity.
-4. The Eligibility Agent checks the profile against the implemented rules.
-5. The Application Agent provides available documents, application steps, and website information.
-6. The Orchestrator coordinates the workflow and presents the results.
+2. Gemini extracts available profile information.
+3. The Discovery Agent retrieves relevant schemes.
+4. The Eligibility Agent evaluates the profile against implemented rules.
+5. The Application Agent provides available application information.
+6. The Orchestrator coordinates the workflow.
 
 ## Limitations
 
-- Eligibility results depend on the accuracy and completeness of the dataset and implemented rules.
-- A relevance score measures textual similarity; it is not a probability of eligibility.
+- Results depend on the quality and completeness of the scheme dataset and implemented rules.
+- TF-IDF relevance scores indicate textual similarity, not the probability of eligibility.
 - Users should verify eligibility requirements and application details through official government sources.
 
 ## Future Improvements
